@@ -40,6 +40,18 @@ func Create(c *fiber.Ctx, db *sql.DB, p entity.Product) (entity.Product, error) 
 	return products[0], nil
 }
 
+func Delete(c *fiber.Ctx, db *sql.DB, id int) error {
+	fmt.Printf("Deleting product from database...\n")
+
+	_, err := db.Query("DELETE FROM produtos WHERE id = $1", id)
+	if err != nil {
+		log.Fatalf("An error occured while executing deletion: %v", err)
+		return err
+	}
+
+	return nil
+}
+
 func Find(c *fiber.Ctx, db *sql.DB) ([]entity.Product, error) {
 	fmt.Printf("Finding all items...\n")
 
