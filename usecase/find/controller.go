@@ -7,5 +7,10 @@ import (
 )
 
 func Handler(c *fiber.Ctx, db *sql.DB) error {
-	return nil
+	out, err := FindAll(c, db)
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(out)
 }

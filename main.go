@@ -10,10 +10,12 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/nellystanford/banco_de_dados/usecase/create"
+	"github.com/nellystanford/banco_de_dados/usecase/find"
 	// "github.com/nellystanford/banco_de_dados/usecase/delete"
 	// "github.com/nellystanford/banco_de_dados/usecase/update"
-	// "github.com/nellystanford/banco_de_dados/usecase/find"
 )
+
+// todo: add routes, verify use of dbmodel and output
 
 func main() {
 	db := connectWithDatabase()
@@ -21,9 +23,9 @@ func main() {
 	app := fiber.New()
 	port := os.Getenv("PORT")
 
-	// app.Get("/find", func(c *fiber.Ctx) error {
-	// 	return find.Handler(c, db)
-	// })
+	app.Get("/find", func(c *fiber.Ctx) error {
+		return find.Handler(c, db)
+	})
 
 	app.Post("/create", func(c *fiber.Ctx) error {
 		return create.Handler(c, db)

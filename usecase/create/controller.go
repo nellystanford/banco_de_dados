@@ -15,10 +15,10 @@ func Handler(c *fiber.Ctx, db *sql.DB) error {
 		return c.SendString(err.Error())
 	}
 
-	err := CreateItem(c, db, input)
+	out, err := CreateItem(c, db, input)
 	if err != nil {
 		return err
 	}
 
-	return c.SendString("Item created successfully")
+	return c.JSON(out)
 }
