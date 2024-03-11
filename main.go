@@ -13,10 +13,13 @@ import (
 	"github.com/nellystanford/banco_de_dados/usecase/delete"
 	"github.com/nellystanford/banco_de_dados/usecase/find"
 	"github.com/nellystanford/banco_de_dados/usecase/update"
-	// "github.com/nellystanford/banco_de_dados/usecase/update"
 )
 
-// todo: add routes, verify use of dbmodel and output
+// adicionar verificação de existencia de item na tabela ao criar no usecase
+// adicionar rota de achar um item e de achar por nome
+// modificar nomes para ingles
+// adicionar função de gerar relatório
+// fazer modelagem das classes que serão utilizadas no sistema utilizando diagrama UML de classe
 
 func main() {
 	db := connectWithDatabase()

@@ -10,8 +10,6 @@ import (
 	"github.com/nellystanford/banco_de_dados/entity"
 )
 
-// adicionar verificação de existencia de item na tabela ao criar no usecase
-
 type ProductDBModel struct {
 	ID         int
 	Nome       string
