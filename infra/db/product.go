@@ -101,14 +101,6 @@ func FindByNameColorAndSize(c *fiber.Ctx, db *sql.DB, name string, color string,
 	return products[0], nil
 }
 
-func dbModelToEntity(input ProductDBModel) entity.Product {
-	return entity.Product{}
-}
-
-func entityToDBModel(input entity.Product) ProductDBModel {
-	return ProductDBModel{}
-}
-
 func sqlResultToEntity(p *sql.Rows) ([]entity.Product, error) {
 	var product entity.Product
 	var products []entity.Product
