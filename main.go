@@ -12,6 +12,7 @@ import (
 	"github.com/nellystanford/banco_de_dados/usecase/create"
 	"github.com/nellystanford/banco_de_dados/usecase/delete"
 	"github.com/nellystanford/banco_de_dados/usecase/find"
+	"github.com/nellystanford/banco_de_dados/usecase/update"
 	// "github.com/nellystanford/banco_de_dados/usecase/update"
 )
 
@@ -31,9 +32,9 @@ func main() {
 		return create.Handler(c, db)
 	})
 
-	// app.Get("/update", func(c *fiber.Ctx) error {
-	// 	return update.Handler(c, db)
-	// })
+	app.Patch("/update", func(c *fiber.Ctx) error {
+		return update.Handler(c, db)
+	})
 
 	app.Delete("/delete", func(c *fiber.Ctx) error {
 		return delete.Handler(c, db)
