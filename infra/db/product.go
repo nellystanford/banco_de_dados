@@ -80,6 +80,24 @@ func Find(c *fiber.Ctx, db *sql.DB) ([]entity.Product, error) {
 	return products, nil
 }
 
+func FindByName(c *fiber.Ctx, db *sql.DB, name string) ([]entity.Product, error) {
+	fmt.Printf("Finding all items...\n")
+
+	p, err := db.Query("SELECT * FROM produtos WHERE nome = $1", name)
+	if err != nil {
+		log.Fatalf("An error occured while recovering data from table: %v", err)
+		return []entity.Product{}, err
+	}
+
+	products, err := sqlResultToEntity(p)
+	if err != nil {
+		log.Fatalf("An error occured while transcripting valued recovered from table: %v", err)
+		return []entity.Product{}, err
+	}
+
+	return products, nil
+}
+
 func FindByNameColorAndSize(c *fiber.Ctx, db *sql.DB, name string, color string, size int) (entity.Product, error) {
 	fmt.Printf("Finding by name, color and size...\n")
 
