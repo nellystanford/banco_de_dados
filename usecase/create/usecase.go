@@ -23,7 +23,7 @@ func CreateItem(c *fiber.Ctx, db *sql.DB, input Input) (Output, error) {
 }
 
 func inputIsValid(input Input) bool {
-	if input.Nome == "" || input.Cor == "" || input.Codigo == 0 || input.Tamanho == 0 || input.Valor == 0 {
+	if input.Name == "" || input.Color == "" || input.Code == 0 || input.Size == 0 || input.Value == 0 {
 		return false
 	}
 	return true
@@ -31,23 +31,23 @@ func inputIsValid(input Input) bool {
 
 func buildInput(input Input) entity.Product {
 	return entity.Product{
-		Nome:       input.Nome,
-		Tamanho:    input.Tamanho,
-		Cor:        input.Cor,
-		Quantidade: input.Quantidade,
-		Codigo:     input.Codigo,
-		Valor:      input.Valor,
+		Nome:       input.Name,
+		Tamanho:    input.Size,
+		Cor:        input.Color,
+		Quantidade: input.Quantity,
+		Codigo:     input.Code,
+		Valor:      input.Value,
 	}
 }
 
 func buildOutput(entity entity.Product) Output {
 	return Output{
-		ID:         entity.ID,
-		Nome:       entity.Nome,
-		Tamanho:    entity.Tamanho,
-		Cor:        entity.Cor,
-		Quantidade: entity.Quantidade,
-		Codigo:     entity.Codigo,
-		Valor:      entity.Valor,
+		ID:       entity.ID,
+		Name:     entity.Nome,
+		Size:     entity.Tamanho,
+		Color:    entity.Cor,
+		Quantity: entity.Quantidade,
+		Code:     entity.Codigo,
+		Value:    entity.Valor,
 	}
 }

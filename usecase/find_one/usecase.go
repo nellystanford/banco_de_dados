@@ -19,12 +19,12 @@ func FindOne(c *fiber.Ctx, db *sql.DB, input Input) (Output, error) {
 
 func buildOutput(entity entity.Product) Output {
 	return Output{
-		ID:         entity.ID,
-		Nome:       entity.Nome,
-		Tamanho:    entity.Tamanho,
-		Cor:        entity.Cor,
-		Quantidade: entity.Quantidade,
-		Codigo:     entity.Codigo,
-		Valor:      entity.Valor,
+		ID:       entity.ID,
+		Name:     entity.Nome,
+		Size:     entity.Tamanho,
+		Color:    entity.Cor,
+		Quantity: entity.Quantidade,
+		Code:     entity.Codigo,
+		Value:    entity.Valor,
 	}
 }

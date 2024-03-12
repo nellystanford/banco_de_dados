@@ -14,7 +14,7 @@ func UpdateItem(c *fiber.Ctx, db *sql.DB, input Input) (Output, error) {
 		return Output{}, fmt.Errorf("Input is invalid")
 	}
 
-	product, err := database.FindByNameColorAndSize(c, db, input.Nome, input.Cor, input.Tamanho)
+	product, err := database.FindByNameColorAndSize(c, db, input.Name, input.Color, input.Size)
 	if err != nil {
 		return Output{}, err
 	}
@@ -22,15 +22,15 @@ func UpdateItem(c *fiber.Ctx, db *sql.DB, input Input) (Output, error) {
 		return Output{}, fmt.Errorf("item does not exist in database")
 	}
 
-	if input.Nome != product.Nome ||
-		input.Tamanho != product.Tamanho ||
-		input.Cor != product.Cor ||
-		input.Codigo != product.Codigo {
+	if input.Name != product.Nome ||
+		input.Size != product.Tamanho ||
+		input.Color != product.Cor ||
+		input.Code != product.Codigo {
 		return Output{}, fmt.Errorf("unable to modify name, size, color or code")
 	}
 
-	product.Valor = input.Valor
-	product.Quantidade = input.Quantidade
+	product.Valor = input.Value
+	product.Quantidade = input.Quantity
 	item, err := database.Update(c, db, product)
 	if err != nil {
 		return Output{}, err
@@ -40,7 +40,7 @@ func UpdateItem(c *fiber.Ctx, db *sql.DB, input Input) (Output, error) {
 }
 
 func inputIsValid(input Input) bool {
-	if input.Quantidade == 0 || input.Valor == 0 {
+	if input.Quantity == 0 || input.Value == 0 {
 		return false
 	}
 	return true
@@ -48,23 +48,23 @@ func inputIsValid(input Input) bool {
 
 func buildInput(input Input) entity.Product {
 	return entity.Product{
-		Nome:       input.Nome,
-		Tamanho:    input.Tamanho,
-		Cor:        input.Cor,
-		Quantidade: input.Quantidade,
-		Codigo:     input.Codigo,
-		Valor:      input.Valor,
+		Nome:       input.Name,
+		Tamanho:    input.Size,
+		Cor:        input.Color,
+		Quantidade: input.Quantity,
+		Codigo:     input.Code,
+		Valor:      input.Value,
 	}
 }
 
 func buildOutput(entity entity.Product) Output {
 	return Output{
-		ID:         entity.ID,
-		Nome:       entity.Nome,
-		Tamanho:    entity.Tamanho,
-		Cor:        entity.Cor,
-		Quantidade: entity.Quantidade,
-		Codigo:     entity.Codigo,
-		Valor:      entity.Valor,
+		ID:       entity.ID,
+		Name:     entity.Nome,
+		Size:     entity.Tamanho,
+		Color:    entity.Cor,
+		Quantity: entity.Quantidade,
+		Code:     entity.Codigo,
+		Value:    entity.Valor,
 	}
 }

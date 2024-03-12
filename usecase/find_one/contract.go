@@ -7,11 +7,11 @@ type Input struct {
 }
 
 type Output struct {
-	ID         int     `json:"id"`
-	Nome       string  `json:"nome"`
-	Tamanho    int     `json:"tamanho"`
-	Cor        string  `json:"cor"`
-	Quantidade int     `json:"quantidade"`
-	Codigo     int     `json:"codigo"`
-	Valor      float64 `json:"valor"`
+	ID       int     `json:"id"`
+	Name     string  `json:"nome"`
+	Size     int     `json:"tamanho"`
+	Color    string  `json:"cor"`
+	Quantity int     `json:"quantidade"`
+	Code     int     `json:"codigo"`
+	Value    float64 `json:"valor"`
 }

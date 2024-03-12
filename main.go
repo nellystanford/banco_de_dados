@@ -8,7 +8,7 @@ import (
 )
 
 // adicionar verificação de existencia de item na tabela ao criar no usecase
-// modificar nomes para ingles
+// modificar nomes do entity para ingles
 
 // adicionar função de gerar relatório
 // fazer modelagem das classes que serão utilizadas no sistema utilizando diagrama UML de classe
