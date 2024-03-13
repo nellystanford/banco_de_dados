@@ -23,13 +23,13 @@ type ProductDBModel struct {
 func Create(c *fiber.Ctx, db *sql.DB, p entity.Product) (entity.Product, error) {
 	fmt.Printf("Inserting product into database...\n")
 
-	_, err := db.Query("INSERT INTO produtos (nome, tamanho, cor, quantidade, codigo, valor) VALUES ($1, $2, $3, $4, $5, $6)", p.Nome, p.Tamanho, p.Cor, p.Quantidade, p.Codigo, p.Valor)
+	_, err := db.Query("INSERT INTO produtos (nome, tamanho, cor, quantidade, codigo, valor) VALUES ($1, $2, $3, $4, $5, $6)", p.Name, p.Size, p.Color, p.Quantity, p.Code, p.Value)
 	if err != nil {
 		log.Fatalf("An error occured while executing insertion: %v", err)
 		return entity.Product{}, err
 	}
 
-	product, err := FindByNameColorAndSize(c, db, p.Nome, p.Cor, p.Tamanho)
+	product, err := FindByNameColorAndSize(c, db, p.Name, p.Color, p.Size)
 	if err != nil {
 		log.Fatalf("An error occured retrieving data after insertion: %v", err)
 		return entity.Product{}, err
@@ -41,7 +41,7 @@ func Create(c *fiber.Ctx, db *sql.DB, p entity.Product) (entity.Product, error) 
 func Update(c *fiber.Ctx, db *sql.DB, product entity.Product) (entity.Product, error) {
 	fmt.Printf("Updating item...\n")
 
-	_, err := db.Query("UPDATE produtos SET quantidade = $1, valor = $2 WHERE id = $3", product.Quantidade, product.Valor, product.ID)
+	_, err := db.Query("UPDATE produtos SET quantidade = $1, valor = $2 WHERE id = $3", product.Quantity, product.Value, product.ID)
 	if err != nil {
 		log.Fatalf("An error occured while executing insertion: %v", err)
 		return entity.Product{}, err
@@ -134,12 +134,12 @@ func sqlResultToEntity(p *sql.Rows) ([]entity.Product, error) {
 			return []entity.Product{}, err
 		}
 		product.ID = id
-		product.Nome = nome
-		product.Tamanho = tamanho
-		product.Cor = cor
-		product.Quantidade = quantidade
-		product.Codigo = codigo
-		product.Valor = valor
+		product.Name = nome
+		product.Size = tamanho
+		product.Color = cor
+		product.Quantity = quantidade
+		product.Code = codigo
+		product.Value = valor
 
 		products = append(products, product)
 		i++

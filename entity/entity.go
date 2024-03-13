@@ -1,11 +1,11 @@
 package entity
 
 type Product struct {
-	ID         int
-	Nome       string
-	Tamanho    int
-	Cor        string
-	Quantidade int
-	Codigo     int
-	Valor      float64
+	ID       int
+	Name     string
+	Size     int
+	Color    string
+	Quantity int
+	Code     int
+	Value    float64
 }

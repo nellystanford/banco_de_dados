@@ -22,15 +22,15 @@ func UpdateItem(c *fiber.Ctx, db *sql.DB, input Input) (Output, error) {
 		return Output{}, fmt.Errorf("item does not exist in database")
 	}
 
-	if input.Name != product.Nome ||
-		input.Size != product.Tamanho ||
-		input.Color != product.Cor ||
-		input.Code != product.Codigo {
+	if input.Name != product.Name ||
+		input.Size != product.Size ||
+		input.Color != product.Color ||
+		input.Code != product.Code {
 		return Output{}, fmt.Errorf("unable to modify name, size, color or code")
 	}
 
-	product.Valor = input.Value
-	product.Quantidade = input.Quantity
+	product.Value = input.Value
+	product.Quantity = input.Quantity
 	item, err := database.Update(c, db, product)
 	if err != nil {
 		return Output{}, err
@@ -46,25 +46,14 @@ func inputIsValid(input Input) bool {
 	return true
 }
 
-func buildInput(input Input) entity.Product {
-	return entity.Product{
-		Nome:       input.Name,
-		Tamanho:    input.Size,
-		Cor:        input.Color,
-		Quantidade: input.Quantity,
-		Codigo:     input.Code,
-		Valor:      input.Value,
-	}
-}
-
 func buildOutput(entity entity.Product) Output {
 	return Output{
 		ID:       entity.ID,
-		Name:     entity.Nome,
-		Size:     entity.Tamanho,
-		Color:    entity.Cor,
-		Quantity: entity.Quantidade,
-		Code:     entity.Codigo,
-		Value:    entity.Valor,
+		Name:     entity.Name,
+		Size:     entity.Size,
+		Color:    entity.Color,
+		Quantity: entity.Quantity,
+		Code:     entity.Code,
+		Value:    entity.Value,
 	}
 }

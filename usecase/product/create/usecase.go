@@ -31,23 +31,23 @@ func inputIsValid(input Input) bool {
 
 func buildInput(input Input) entity.Product {
 	return entity.Product{
-		Nome:       input.Name,
-		Tamanho:    input.Size,
-		Cor:        input.Color,
-		Quantidade: input.Quantity,
-		Codigo:     input.Code,
-		Valor:      input.Value,
+		Name:     input.Name,
+		Size:     input.Size,
+		Color:    input.Color,
+		Quantity: input.Quantity,
+		Code:     input.Code,
+		Value:    input.Value,
 	}
 }
 
 func buildOutput(entity entity.Product) Output {
 	return Output{
 		ID:       entity.ID,
-		Name:     entity.Nome,
-		Size:     entity.Tamanho,
-		Color:    entity.Cor,
-		Quantity: entity.Quantidade,
-		Code:     entity.Codigo,
-		Value:    entity.Valor,
+		Name:     entity.Name,
+		Size:     entity.Size,
+		Color:    entity.Color,
+		Quantity: entity.Quantity,
+		Code:     entity.Code,
+		Value:    entity.Value,
 	}
 }

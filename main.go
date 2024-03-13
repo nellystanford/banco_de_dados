@@ -11,7 +11,6 @@ import (
 // modificar nomes do entity para ingles
 
 // adicionar função de gerar relatório
-// fazer modelagem das classes que serão utilizadas no sistema utilizando diagrama UML de classe
 // adicionar quantidade vendia, fazer relatorio getsummary e relatar valor total ventido, quantidade de cada peça restante e 3 peças mais populares
 
 func main() {

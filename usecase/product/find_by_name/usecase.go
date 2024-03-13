@@ -25,11 +25,11 @@ func Find(c *fiber.Ctx, db *sql.DB, input Input) ([]Output, error) {
 func buildOutput(entity entity.Product) Output {
 	return Output{
 		ID:       entity.ID,
-		Name:     entity.Nome,
-		Size:     entity.Tamanho,
-		Color:    entity.Cor,
-		Quantity: entity.Quantidade,
-		Code:     entity.Codigo,
-		Value:    entity.Valor,
+		Name:     entity.Name,
+		Size:     entity.Size,
+		Color:    entity.Color,
+		Quantity: entity.Quantity,
+		Code:     entity.Code,
+		Value:    entity.Value,
 	}
 }
