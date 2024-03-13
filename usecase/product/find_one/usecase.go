@@ -5,7 +5,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/nellystanford/banco_de_dados/entity"
-	database "github.com/nellystanford/banco_de_dados/infra/db"
+	database "github.com/nellystanford/banco_de_dados/infra/db/product"
 )
 
 func FindOne(c *fiber.Ctx, db *sql.DB, input Input) (Output, error) {

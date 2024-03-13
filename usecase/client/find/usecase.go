@@ -5,7 +5,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/nellystanford/banco_de_dados/entity"
-	database "github.com/nellystanford/banco_de_dados/infra/db/product"
+	database "github.com/nellystanford/banco_de_dados/infra/db/client"
 )
 
 func FindAll(c *fiber.Ctx, db *sql.DB) ([]Output, error) {
@@ -22,14 +22,13 @@ func FindAll(c *fiber.Ctx, db *sql.DB) ([]Output, error) {
 	return output, nil
 }
 
-func buildOutput(entity entity.Product) Output {
+func buildOutput(entity entity.Client) Output {
 	return Output{
-		ID:       entity.ID,
-		Name:     entity.Name,
-		Size:     entity.Size,
-		Color:    entity.Color,
-		Quantity: entity.Quantity,
-		Code:     entity.Code,
-		Value:    entity.Value,
+		ID:         entity.ID,
+		Name:       entity.Name,
+		Email:      entity.Email,
+		CPF:        entity.CPF,
+		Address:    entity.Address,
+		Newsletter: entity.Newsletter,
 	}
 }

@@ -81,7 +81,7 @@ func Find(c *fiber.Ctx, db *sql.DB) ([]entity.Product, error) {
 }
 
 func FindByName(c *fiber.Ctx, db *sql.DB, name string) ([]entity.Product, error) {
-	fmt.Printf("Finding all items...\n")
+	fmt.Printf("Finding all items by name...\n")
 
 	p, err := db.Query("SELECT * FROM produtos WHERE nome = $1", name)
 	if err != nil {
@@ -125,21 +125,21 @@ func sqlResultToEntity(p *sql.Rows) ([]entity.Product, error) {
 	var i int = 0
 
 	for p.Next() {
-		var nome, cor string
-		var id, tamanho, quantidade, codigo int
-		var valor float64
+		var name, color string
+		var id, size, quantity, code int
+		var value float64
 
-		err := p.Scan(&id, &nome, &tamanho, &cor, &quantidade, &codigo, &valor)
+		err := p.Scan(&id, &name, &size, &color, &quantity, &code, &value)
 		if err != nil {
 			return []entity.Product{}, err
 		}
 		product.ID = id
-		product.Name = nome
-		product.Size = tamanho
-		product.Color = cor
-		product.Quantity = quantidade
-		product.Code = codigo
-		product.Value = valor
+		product.Name = name
+		product.Size = size
+		product.Color = color
+		product.Quantity = quantity
+		product.Code = code
+		product.Value = value
 
 		products = append(products, product)
 		i++

@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	"github.com/gofiber/fiber/v2"
-	database "github.com/nellystanford/banco_de_dados/infra/db/product"
+	database "github.com/nellystanford/banco_de_dados/infra/db/client"
 )
 
 func DeleteItem(c *fiber.Ctx, db *sql.DB, input Input) error {

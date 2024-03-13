@@ -14,6 +14,10 @@ import (
 	findProductByName "github.com/nellystanford/banco_de_dados/usecase/product/find_by_name"
 	findOneProduct "github.com/nellystanford/banco_de_dados/usecase/product/find_one"
 	updateProduct "github.com/nellystanford/banco_de_dados/usecase/product/update"
+
+	createClient "github.com/nellystanford/banco_de_dados/usecase/client/create"
+	deleteClient "github.com/nellystanford/banco_de_dados/usecase/client/delete"
+	findClient "github.com/nellystanford/banco_de_dados/usecase/client/find"
 )
 
 func Routes(db *sql.DB) {
@@ -44,21 +48,21 @@ func Routes(db *sql.DB) {
 		return deleteProduct.Handler(c, db)
 	})
 
-	// app.Get("/findClient", func(c *fiber.Ctx) error {
-	// 	return findClient.Handler(c, db)
-	// })
+	app.Get("/findClient", func(c *fiber.Ctx) error {
+		return findClient.Handler(c, db)
+	})
 
-	// app.Post("/createClient", func(c *fiber.Ctx) error {
-	// 	return createClient.Handler(c, db)
-	// })
+	app.Post("/createClient", func(c *fiber.Ctx) error {
+		return createClient.Handler(c, db)
+	})
 
 	// app.Patch("/updateClient", func(c *fiber.Ctx) error {
 	// 	return updateClient.Handler(c, db)
 	// })
 
-	// app.Delete("/deleteClient", func(c *fiber.Ctx) error {
-	// 	return deleteClient.Handler(c, db)
-	// })
+	app.Delete("/deleteClient", func(c *fiber.Ctx) error {
+		return deleteClient.Handler(c, db)
+	})
 
 	// app.Get("/findOrder", func(c *fiber.Ctx) error {
 	// 	return findClient.Handler(c, db)
