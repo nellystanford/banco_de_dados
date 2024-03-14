@@ -10,9 +10,9 @@ import (
 func Handler(c *fiber.Ctx, db *sql.DB) error {
 	var input Input
 
-	input.Nome = c.Query("name")
-	input.Cor = c.Query("color")
-	tamanho, err := strconv.Atoi(c.Query("size"))
+	input.Nome = c.Query("nome")
+	input.Cor = c.Query("cor")
+	tamanho, err := strconv.Atoi(c.Query("tamanho"))
 	if err != nil {
 		return err
 	}

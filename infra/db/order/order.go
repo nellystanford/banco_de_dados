@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"strconv"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/lib/pq"
 	"github.com/nellystanford/banco_de_dados/entity"
 )
 
@@ -15,13 +15,13 @@ type ClientDBModel struct {
 	ClientName string
 	CPF        string
 	Address    string
-	Product    []int
+	Product    pq.Int32Array
 }
 
 func Create(c *fiber.Ctx, db *sql.DB, o entity.Order) error {
 	fmt.Printf("Inserting order into database...\n")
 
-	_, err := db.Query("INSERT INTO pedidos (nome, cpf, endereco, produtos) VALUES ($1, $2, $3, $4)", o.ClientName, o.CPF, o.Address, buildSQLQueryProductArray(o.Product))
+	_, err := db.Query("INSERT INTO pedidos (nome, cpf, endereco, produtos) VALUES ($1, $2, $3, $4)", o.ClientName, o.CPF, o.Address, o.Product)
 	if err != nil {
 		log.Fatalf("An error occured while executing insertion: %v", err)
 		return err
@@ -60,16 +60,6 @@ func Find(c *fiber.Ctx, db *sql.DB) ([]entity.Order, error) {
 	return orders, nil
 }
 
-func buildSQLQueryProductArray(products []int) string {
-	var arrayQuery string = "'{"
-	for _, p := range products {
-		arrayQuery = arrayQuery + strconv.Itoa(p) + ", "
-	}
-	arrayQuery = arrayQuery + "}'"
-
-	return arrayQuery
-}
-
 func sqlResultToEntity(p *sql.Rows) ([]entity.Order, error) {
 	var order entity.Order
 	var orders []entity.Order
@@ -77,7 +67,7 @@ func sqlResultToEntity(p *sql.Rows) ([]entity.Order, error) {
 
 	for p.Next() {
 		var name, cpf, address string
-		var product []int
+		var product pq.Int32Array
 		var id int
 
 		err := p.Scan(&id, &name, &cpf, &address, &product)
