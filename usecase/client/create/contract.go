@@ -5,7 +5,7 @@ type Input struct {
 	Email      string `json:"email"`
 	CPF        string `json:"cpf"`
 	Address    string `json:"endereco"`
-	Newsletter bool   `json:"assinante_newsletter"`
+	Newsletter bool   `json:"newsletter"`
 }
 
 type Output struct {
@@ -14,5 +14,5 @@ type Output struct {
 	Email      string `json:"email"`
 	CPF        string `json:"cpf"`
 	Address    string `json:"endereco"`
-	Newsletter bool   `json:"assinante_newsletter"`
+	Newsletter bool   `json:"newsletter"`
 }

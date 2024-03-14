@@ -7,10 +7,7 @@ import (
 	"github.com/nellystanford/banco_de_dados/http"
 )
 
-// adicionar verificação de existencia de item na tabela ao criar no usecase
-
-// adicionar função de gerar relatório
-// adicionar quantidade vendia, fazer relatorio getsummary e relatar valor total ventido, quantidade de cada peça restante e 3 peças mais populares
+// verificacoes necessarias: se cpf ja existe ao criar cliente e se produto ja existe
 
 func main() {
 	db := connectWithDatabase()

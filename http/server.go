@@ -22,6 +22,8 @@ import (
 	createOrder "github.com/nellystanford/banco_de_dados/usecase/order/create"
 	deleteOrder "github.com/nellystanford/banco_de_dados/usecase/order/delete"
 	findOrder "github.com/nellystanford/banco_de_dados/usecase/order/find"
+
+	"github.com/nellystanford/banco_de_dados/usecase/summary"
 )
 
 func Routes(db *sql.DB) {
@@ -74,6 +76,10 @@ func Routes(db *sql.DB) {
 
 	app.Delete("/deleteOrder", func(c *fiber.Ctx) error {
 		return deleteOrder.Handler(c, db)
+	})
+
+	app.Get("/summary", func(c *fiber.Ctx) error {
+		return summary.Handler(c, db)
 	})
 
 	if port == "" {
