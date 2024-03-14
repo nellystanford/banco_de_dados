@@ -14,6 +14,14 @@ func CreateItem(c *fiber.Ctx, db *sql.DB, input Input) (Output, error) {
 		return Output{}, fmt.Errorf("Input is invalid")
 	}
 
+	productExists, err := database.FindByNameColorAndSize(c, db, input.Name, input.Color, input.Size)
+	if err != nil {
+		return Output{}, err
+	}
+	if productExists != nil {
+		return Output{}, fmt.Errorf("cannot create product because it already exists")
+	}
+
 	item, err := database.Create(c, db, buildInput(input))
 	if err != nil {
 		return Output{}, err

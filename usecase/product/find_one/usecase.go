@@ -14,7 +14,7 @@ func FindOne(c *fiber.Ctx, db *sql.DB, input Input) (Output, error) {
 		return Output{}, err
 	}
 
-	return buildOutput(item), nil
+	return buildOutput(*item), nil
 }
 
 func buildOutput(entity entity.Product) Output {

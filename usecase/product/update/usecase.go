@@ -31,7 +31,7 @@ func UpdateItem(c *fiber.Ctx, db *sql.DB, input Input) (Output, error) {
 
 	product.Value = input.Value
 	product.Quantity = input.Quantity
-	item, err := database.Update(c, db, product)
+	item, err := database.Update(c, db, *product)
 	if err != nil {
 		return Output{}, err
 	}

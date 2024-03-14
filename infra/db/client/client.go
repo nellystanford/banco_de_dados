@@ -33,7 +33,7 @@ func Create(c *fiber.Ctx, db *sql.DB, p entity.Client) (entity.Client, error) {
 		return entity.Client{}, err
 	}
 
-	return client, nil
+	return *client, nil
 }
 
 func Delete(c *fiber.Ctx, db *sql.DB, id int) error {
@@ -66,25 +66,25 @@ func Find(c *fiber.Ctx, db *sql.DB) ([]entity.Client, error) {
 	return clients, nil
 }
 
-func FindByCPF(c *fiber.Ctx, db *sql.DB, cpf string) (entity.Client, error) {
+func FindByCPF(c *fiber.Ctx, db *sql.DB, cpf string) (*entity.Client, error) {
 	fmt.Printf("Finding client by cpf...\n")
 
 	p, err := db.Query("SELECT * FROM clientes WHERE cpf = $1", cpf)
 	if err != nil {
 		log.Fatalf("An error occured while recovering data from table: %v", err)
-		return entity.Client{}, err
+		return nil, err
 	}
 
 	clients, err := sqlResultToEntity(p)
 	if err != nil {
 		log.Fatalf("An error occured while transcripting valued recovered from table: %v", err)
-		return entity.Client{}, err
+		return nil, err
 	}
 	if len(clients) == 0 {
-		return entity.Client{}, nil
+		return nil, nil
 	}
 
-	return clients[0], nil
+	return &clients[0], nil
 }
 
 func sqlResultToEntity(p *sql.Rows) ([]entity.Client, error) {

@@ -8,6 +8,7 @@ import (
 )
 
 // verificacoes necessarias: se cpf ja existe ao criar cliente e se produto ja existe
+// atualizar diagrama uml
 
 func main() {
 	db := connectWithDatabase()

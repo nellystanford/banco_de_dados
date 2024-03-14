@@ -14,6 +14,14 @@ func CreateItem(c *fiber.Ctx, db *sql.DB, input Input) (Output, error) {
 		return Output{}, fmt.Errorf("Input is invalid")
 	}
 
+	cpfExists, err := database.FindByCPF(c, db, input.CPF)
+	if err != nil {
+		return Output{}, err
+	}
+	if cpfExists != nil {
+		return Output{}, fmt.Errorf("cannot create client because CPF is already registered in database")
+	}
+
 	item, err := database.Create(c, db, buildInput(input))
 	if err != nil {
 		return Output{}, err

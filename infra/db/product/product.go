@@ -35,7 +35,7 @@ func Create(c *fiber.Ctx, db *sql.DB, p entity.Product) (entity.Product, error) 
 		return entity.Product{}, err
 	}
 
-	return product, nil
+	return *product, nil
 }
 
 func Update(c *fiber.Ctx, db *sql.DB, product entity.Product) (entity.Product, error) {
@@ -98,25 +98,25 @@ func FindByName(c *fiber.Ctx, db *sql.DB, name string) ([]entity.Product, error)
 	return products, nil
 }
 
-func FindByNameColorAndSize(c *fiber.Ctx, db *sql.DB, name string, color string, size int) (entity.Product, error) {
+func FindByNameColorAndSize(c *fiber.Ctx, db *sql.DB, name string, color string, size int) (*entity.Product, error) {
 	fmt.Printf("Finding by name, color and size...\n")
 
 	p, err := db.Query("SELECT * FROM produtos WHERE nome = $1 and cor = $2 and tamanho = $3", name, color, size)
 	if err != nil {
 		log.Fatalf("An error occured while recovering data from table: %v", err)
-		return entity.Product{}, err
+		return nil, err
 	}
 
 	products, err := sqlResultToEntity(p)
 	if err != nil {
 		log.Fatalf("An error occured while transcripting valued recovered from table: %v", err)
-		return entity.Product{}, err
+		return nil, err
 	}
 	if len(products) == 0 {
-		return entity.Product{}, nil
+		return nil, nil
 	}
 
-	return products[0], nil
+	return &products[0], nil
 }
 
 func sqlResultToEntity(p *sql.Rows) ([]entity.Product, error) {
