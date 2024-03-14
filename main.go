@@ -8,9 +8,6 @@ import (
 )
 
 // adicionar verificação de existencia de item na tabela ao criar no usecase
-// criar tabelas
-// criar funcs de pedidos e clientes
-// construir update cliente
 
 // adicionar função de gerar relatório
 // adicionar quantidade vendia, fazer relatorio getsummary e relatar valor total ventido, quantidade de cada peça restante e 3 peças mais populares

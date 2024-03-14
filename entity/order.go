@@ -1,9 +1,9 @@
 package entity
 
 type Order struct {
-	ID      int
-	Number  int
-	Client  []Client
-	Address string
-	Product []Product
+	ID         int
+	ClientName string
+	CPF        string
+	Address    string
+	Product    []int
 }

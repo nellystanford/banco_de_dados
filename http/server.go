@@ -18,6 +18,10 @@ import (
 	createClient "github.com/nellystanford/banco_de_dados/usecase/client/create"
 	deleteClient "github.com/nellystanford/banco_de_dados/usecase/client/delete"
 	findClient "github.com/nellystanford/banco_de_dados/usecase/client/find"
+
+	createOrder "github.com/nellystanford/banco_de_dados/usecase/order/create"
+	deleteOrder "github.com/nellystanford/banco_de_dados/usecase/order/delete"
+	findOrder "github.com/nellystanford/banco_de_dados/usecase/order/find"
 )
 
 func Routes(db *sql.DB) {
@@ -56,29 +60,21 @@ func Routes(db *sql.DB) {
 		return createClient.Handler(c, db)
 	})
 
-	// app.Patch("/updateClient", func(c *fiber.Ctx) error {
-	// 	return updateClient.Handler(c, db)
-	// })
-
 	app.Delete("/deleteClient", func(c *fiber.Ctx) error {
 		return deleteClient.Handler(c, db)
 	})
 
-	// app.Get("/findOrder", func(c *fiber.Ctx) error {
-	// 	return findClient.Handler(c, db)
-	// })
+	app.Get("/findOrder", func(c *fiber.Ctx) error {
+		return findOrder.Handler(c, db)
+	})
 
-	// app.Post("/createOrder", func(c *fiber.Ctx) error {
-	// 	return createClient.Handler(c, db)
-	// })
+	app.Post("/createOrder", func(c *fiber.Ctx) error {
+		return createOrder.Handler(c, db)
+	})
 
-	// app.Patch("/updateOrder", func(c *fiber.Ctx) error {
-	// 	return updateClient.Handler(c, db)
-	// })
-
-	// app.Delete("/deleteOrder", func(c *fiber.Ctx) error {
-	// 	return deleteClient.Handler(c, db)
-	// })
+	app.Delete("/deleteOrder", func(c *fiber.Ctx) error {
+		return deleteOrder.Handler(c, db)
+	})
 
 	if port == "" {
 		port = "3000"

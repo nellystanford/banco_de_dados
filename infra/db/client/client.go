@@ -36,18 +36,6 @@ func Create(c *fiber.Ctx, db *sql.DB, p entity.Client) (entity.Client, error) {
 	return client, nil
 }
 
-// func Update(c *fiber.Ctx, db *sql.DB, client entity.Client) (entity.Client, error) {
-// 	fmt.Printf("Updating item...\n")
-
-// 	_, err := db.Query("UPDATE clientes SET quantidade = $1, valor = $2 WHERE id = $3", product.Quantity, product.Value, product.ID)
-// 	if err != nil {
-// 		log.Fatalf("An error occured while executing insertion: %v", err)
-// 		return entity.Client{}, err
-// 	}
-
-// 	return product, nil
-// }
-
 func Delete(c *fiber.Ctx, db *sql.DB, id int) error {
 	fmt.Printf("Deleting client from database...\n")
 
