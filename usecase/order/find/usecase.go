@@ -9,7 +9,7 @@ import (
 )
 
 func FindAll(c *fiber.Ctx, db *sql.DB) ([]Output, error) {
-	items, err := database.Find(c, db)
+	items, err := database.FindOrders(c, db)
 	if err != nil {
 		return []Output{}, err
 	}

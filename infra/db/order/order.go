@@ -42,7 +42,7 @@ func Delete(c *fiber.Ctx, db *sql.DB, id int) error {
 	return nil
 }
 
-func Find(c *fiber.Ctx, db *sql.DB) ([]entity.Order, error) {
+func FindOrders(c *fiber.Ctx, db *sql.DB) ([]entity.Order, error) {
 	fmt.Printf("Finding all orders...\n")
 
 	ord, err := db.Query("SELECT * FROM pedidos")

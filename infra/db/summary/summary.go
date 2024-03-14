@@ -6,6 +6,7 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
+	database "github.com/nellystanford/banco_de_dados/infra/db/order"
 )
 
 func GetOrdersAmount(c *fiber.Ctx, db *sql.DB) (int, error) {
@@ -28,7 +29,7 @@ func GetOrdersAmount(c *fiber.Ctx, db *sql.DB) (int, error) {
 }
 
 func GetClientsAmount(c *fiber.Ctx, db *sql.DB) (int, error) {
-	fmt.Printf("Getting orders amount...\n")
+	fmt.Printf("Getting clients amount...\n")
 
 	sales, err := db.Query("SELECT COUNT (*) FROM clientes")
 	if err != nil {
@@ -47,7 +48,7 @@ func GetClientsAmount(c *fiber.Ctx, db *sql.DB) (int, error) {
 }
 
 func GetNewsletterSubscriptions(c *fiber.Ctx, db *sql.DB) (int, error) {
-	fmt.Printf("Getting orders amount...\n")
+	fmt.Printf("Getting newsletter subscriptions amount...\n")
 
 	newsletter, err := db.Query("SELECT COUNT (*) FROM clientes WHERE newsletter = $1", true)
 	if err != nil {
@@ -65,14 +66,36 @@ func GetNewsletterSubscriptions(c *fiber.Ctx, db *sql.DB) (int, error) {
 	return count, nil
 }
 
-// func GetSalesAmount(c *fiber.Ctx, db *sql.DB) (float64, error) {
-// 	fmt.Printf("Getting orders amount...\n")
+func GetSalesAmount(c *fiber.Ctx, db *sql.DB) (float64, error) {
+	fmt.Printf("Getting sales amount...\n")
 
-// 	orders, err := db.Query("SELECT COUNT (*) FROM pedidos")
-// 	if err != nil {
-// 		log.Fatalf("An error occured while recovering data from table: %v", err)
-// 		return 0, err
-// 	}
+	orders, err := database.FindOrders(c, db)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-// 	return 0, nil
-// }
+	var value float64
+	for _, o := range orders {
+		for _, codigo := range o.Product {
+			result, err := db.Query("SELECT * FROM produtos WHERE codigo = $1", codigo)
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			var name, color string
+			var id, size, quantity, code int
+			var v float64
+
+			for result.Next() {
+				err := result.Scan(&id, &name, &size, &color, &quantity, &code, &v)
+				if err != nil {
+					log.Fatal(err)
+				}
+			}
+
+			value = value + v
+		}
+	}
+
+	return value, nil
+}
